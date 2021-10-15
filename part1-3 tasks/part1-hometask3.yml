@@ -1,0 +1,13 @@
+- name: playbook to work with Grub file
+  hosts: nodes
+  tasks:
+  - name: find and add parameters to line of grub file
+    lineinfile:
+      state: present
+      dest: /etc/default/grub
+      backrefs: yes
+      regexp: '^(GRUB_CMDLINE_LINUX=\"[^\"]+)(\".*)' 
+      line: '\1 net.ifnames=0 biosdevname=0\2'
+
+  - name: write grub config file command
+    command: grub2-mkconfig

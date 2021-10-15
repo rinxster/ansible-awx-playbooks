@@ -1,0 +1,19 @@
+<html>
+    <center><h1> This Apache webserver is running on {{ ansible_hostname }} </h1>
+    </center>
+<body>
+<br>
+Ansible facts usage example:
+<br>
+<br>
+total memory: {{ ansible_facts['memtotal_mb'] }} mb
+<br>
+free memory: {{ ansible_facts['memfree_mb'] }} mb
+<br>
+<br>
+OS version:  {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}
+<br>
+<br>
+In case any questions please apply to: {{ sysadmin_email }}
+</body>
+</html>

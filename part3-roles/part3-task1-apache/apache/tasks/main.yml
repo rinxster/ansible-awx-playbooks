@@ -1,0 +1,35 @@
+---
+# tasks file 
+- name: "Install RedHat packages"
+  package: 
+      name: "{{ item }}"
+      state: present
+  loop:  
+  - "{{ ap_extra_software }}" 
+    
+- name: Enable Httpd
+  service:
+    name: "httpd"
+    enabled: yes
+
+- name: "make sure https and firewalld started"
+  service: 
+      name: "{{ item }}"
+      state: started
+  loop: "{{ ap_extra_software }}"
+
+
+- name: Create index.html from j2 template
+  template:
+      src: templates/index.j2
+      dest: /var/www/html/index.html
+  notify: "Restart Httpd"
+  
+- name: "Add firewall rule" 
+  firewalld:
+      port: "{{ ap_http_port }}/tcp"
+      permanent: yes
+      state: enabled
+      immediate: yes
+  notify: "Restart firewalld"
+  ignore_errors: True

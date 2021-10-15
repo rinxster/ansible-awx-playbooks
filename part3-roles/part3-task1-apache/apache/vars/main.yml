@@ -1,0 +1,5 @@
+---
+# vars file for myapache
+ap_extra_software:
+- 'httpd'
+- 'firewalld'

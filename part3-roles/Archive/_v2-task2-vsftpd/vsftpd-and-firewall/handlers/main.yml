@@ -1,0 +1,11 @@
+- name: run restorecon
+  command: restorecon -v /var/ftp/pub
+- name: restart vsftpd
+  service:
+    name: vsftpd
+    state: restarted
+- name: restart firewalld
+  service: 
+    name: firewalld
+    state: restarted
+    

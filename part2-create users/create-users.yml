@@ -1,0 +1,19 @@
+- name: Playbook to create users
+  hosts: nodes
+  vars:
+    password: '$6$lSpDAyV5Xe$T/ysF9QBsp.7ccFPf7EV8hZoMhBjKMIhuRquSvto6ab5hCObg77Xb1B4zVsGdUSjA7ZzNGIsAgy74UcvVeopL/'
+    users:
+    - username: alice
+      email: alice@example.com
+      home: /home/alice
+    - username: bob
+      email: bob@example.com
+      home: /home/bob
+    - username: carol
+      email: carol@example.com
+      home: /home/carol
+
+  tasks:
+    - name: creating user
+      user: name={{item.username}} comment={{item.email}} home={{item.home}} password={{password}}
+      with_items: "{{users}}"
