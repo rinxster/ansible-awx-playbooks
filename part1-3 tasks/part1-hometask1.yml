@@ -13,6 +13,10 @@
     copy:
       src: index.html
       dest: /var/www/html/index.html
+  - name: insstall firewalld
+    yum:
+      name: firewalld
+      state: present
   - name: Open port 80 for http access
     firewalld:
       service: http
