@@ -1,7 +1,0 @@
-- hosts: nodes
-  remote_user: ansible
-  become: yes
-  become_method: sudo
-  roles:
-    - vsftpd-and-firewall
-

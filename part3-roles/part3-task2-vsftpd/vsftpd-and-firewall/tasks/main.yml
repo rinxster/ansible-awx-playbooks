@@ -11,6 +11,13 @@
   notify:
     - restart vsftpd
 
+- name: Make sure services are started and enabled
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop: "{{ services }}"
+
 - name: Create ftp pub folder and set permissions
   file:
     path: /var/ftp/pub
@@ -63,9 +70,3 @@
     - restart firewalld
 
 
-- name: Make sure services are started and enabled
-  service:
-    name: "{{ item }}"
-    enabled: yes
-    state: started
-  loop: "{{ services }}"
